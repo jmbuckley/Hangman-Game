@@ -37,8 +37,7 @@ function updateLetters(letter){
         //the for loop runs through all of the words letters
         // now if a letter matches, the if (below) comes in to play
         if(letter === answerWord[i]) {
-            var answerWordletter = answerWord[i]
-            hangmanWord[i] = answerWordletter;
+
             hangmanWord[i] = answerWord[i];
         }
     }
@@ -103,6 +102,7 @@ function updateScore(){
 }
 
 function updateWin() {
+    document.getElementById('message').textContent="Awesome! You Won!"
     //add what happens if the user wins code here
     winCounter += 1
     //Make a call to the startGame function here. 
@@ -111,6 +111,7 @@ function updateWin() {
 }
 
 function updateLoss() {
+    document.getElementById('message').textContent="Bummer...You Lost :("
     //add what happens if the user loses code here
     lossCounter += 1
     //Make a call to the startGame function here.
@@ -119,9 +120,9 @@ function updateLoss() {
 }
 //This function takes an arr for an argument (we use it for our id array)
 function print(arr) {
-    arr.forEach(function (idName){
+    arr.forEach(function(idName){
         // If the idName variable is an array do this
-        if(Array.isArray(idName)) {
+        if(Array.isArray(window[idName])) {
             document.getElementById(idName).textContent = window[idName].join(' ')
         }
 
@@ -135,11 +136,11 @@ function print(arr) {
 
 function startGame() {
     // Add your board setup functions and or code here
-    answerWord = randomize(wordBank);
+    answerWord = randomize(wordBank)
     // The wrongGuesses variable needs to be an array
     wrongGuesses = []
     // The hangmanWord variable needs to be an array
-    hangmanWord = hideWord(answerWord);
+    hangmanWord = hideWord(answerWord)
     // The guessesLeft variable needs to be an Integer
     guessesLeft = 8
     // The winCounter variable needs to be an Integer
@@ -150,7 +151,7 @@ function startGame() {
 //keyup event
 //This is how our player is interacting with our game.
 //This drives all the game mechanics.
-document.addEventListener("keyup", function(event){
+document.addEventListener('keyup', function(event){
     if(validateInput(event.key)){
         //make a call to the takeTurn Function
         takeTurn(event.key)
@@ -160,4 +161,4 @@ document.addEventListener("keyup", function(event){
 });
 
 //This makes the first call (initial) call to start the game.
-startGame();
+startGame()
